@@ -7,4 +7,4 @@ def testFCFS(filename='default.dat'):
     scheduler = Scheduler()
     scheduler.load(filepath)
     scheduler.run_until_complete()
-    scheduler.analysis()
+    scheduler.analysis("FCFS")
