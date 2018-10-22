@@ -7,7 +7,6 @@ class Scheduler(BaseSchduler):
 
     def dispatch(self):
         if self.process_candidate:
-            self.set_chip(25)
             self.update(1)
             return self.process_candidate.pop(0)
         else:
