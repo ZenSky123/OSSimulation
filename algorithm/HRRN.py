@@ -14,4 +14,4 @@ class Scheduler(BaseSchduler):
 
     def reorder(self):
         """HRRN算法需要将R值最高的进程排在最前面 R= 等待时间/执行时间"""
-        self.process_candidate.sort(key=lambda p: self.process_wait_time[p] / p.cputime)
+        self.process_candidate.sort(key=lambda p: self.process_wait_time[p] / (p.cputime + 1))

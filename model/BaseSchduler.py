@@ -45,7 +45,7 @@ class BaseSchduler:
                 if first_process.reachTime == current_time:
                     # 如果进程可以载入就载入
                     self.process_in_memory.add(first_process)
-                    self.process_candidate.append(first_process)
+                    self.append(first_process)
                     self.process_unloaded.pop(0)
                 elif first_process.reachTime > current_time:
                     break
@@ -104,7 +104,7 @@ class BaseSchduler:
         # for process, wait_time in self.process_wait_time.items():
         #     print("{}\twait for : {}".format(process, wait_time))
 
-        print("{} Complete. Average turnaround time : {}".format(name, average))
+        print("{} Complete. Average turnaround time : {}ms".format(name, average))
 
     def set_chip(self, chip):
         """
