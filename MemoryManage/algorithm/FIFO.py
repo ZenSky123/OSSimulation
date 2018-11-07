@@ -21,13 +21,13 @@ class MMU(BaseMMU):
         page_frame_replaced_index = self.page_frame_queue.get()
         self.page_frame_queue.put(page_frame_replaced_index)
 
-        old_page_frame = self.page_frames[page_frame_replaced_index].page
-        if old_page_frame is not None:
-            old_page_frame.reset()
+        old_page = self.page_frames[page_frame_replaced_index].page
+        if old_page is not None:
+            old_page.reset()
 
         self.page_frames[page_frame_replaced_index].page = page
         page.page_frame_index = page_frame_replaced_index
-        page.exist=1
+        page.exist = 1
 
     def use(self, page):
         """FIFO算法在使用完一个页面之后不需要对队列做更新"""
