@@ -6,14 +6,14 @@ class Page:
             modified 修改位
             referenced 访问位
             exist 在/不在位
-            page_frame_index 页框号
+            page_frame_index 页框引用
         """
         self.cache_forbidden = 0
         self.protection = 0
         self.modified = 0
         self.referenced = 0
         self.exist = 0
-        self.page_frame_index = None
+        self.page_frame = None
 
     def reset(self):
         """

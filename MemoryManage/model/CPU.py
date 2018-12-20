@@ -1,4 +1,5 @@
 from . import Process
+import random
 
 
 class CPU:
@@ -52,6 +53,7 @@ class CPU:
                 self.processes.append(process)
                 for address_use in process.address_used:
                     self.process_address_use.append((process, address_use))
+        random.shuffle(self.process_address_use)
 
     def analysis(self, func_name):
         print(func_name, ":")

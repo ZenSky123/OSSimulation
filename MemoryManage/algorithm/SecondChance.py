@@ -11,7 +11,7 @@ class MMU(BaseMMU):
         """
         super().__init__(memory_size)
         self.page_frame_queue = Queue()
-        [self.page_frame_queue.put(i) for i in range(self.page_frame_number)]
+        [self.page_frame_queue.put(page_frame) for page_frame in self.page_frames]
 
     def replace(self, page):
         """
@@ -19,20 +19,20 @@ class MMU(BaseMMU):
         :param page: 要置换进内存的页面
         """
         while 1:
-            page_frame_replaced_index = self.page_frame_queue.get()
-            self.page_frame_queue.put(page_frame_replaced_index)
+            page_frame_replaced = self.page_frame_queue.get()
+            self.page_frame_queue.put(page_frame_replaced)
 
-            old_page = self.page_frames[page_frame_replaced_index].page
+            old_page = page_frame_replaced.page
             if old_page is None or old_page.referenced == 0:
                 if old_page:
                     old_page.reset()
 
-                self.page_frames[page_frame_replaced_index].page = page
-                page.page_frame_index = page_frame_replaced_index
+                page_frame_replaced.page = page
+                page.page_frame = page_frame_replaced
                 page.exist = 1
                 break
             else:
-                old_page.referenced  = 0
+                old_page.referenced = 0
 
     def use(self, page):
         """每次访问之后将页面的访问位置1"""
